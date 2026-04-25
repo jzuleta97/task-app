@@ -1,0 +1,123 @@
+<ion-content [fullscreen]="true">
+  <div
+    class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-indigo-100 selection:text-indigo-900"
+  >
+    <div
+      class="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200"
+    >
+      <div
+        class="px-6 py-6 border-b border-gray-100 bg-white relative z-10 shadow-sm"
+      >
+        <div class="flex items-center justify-between mb-6">
+          <button
+            (click)="goBack()"
+            class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-medium rounded-lg px-2 py-1 -ml-2"
+          >
+            <ion-icon name="arrow-back-outline"></ion-icon>
+            Volver
+          </button>
+          <h1 class="text-xl font-bold text-gray-900 tracking-tight">
+            Lista de Tareas
+          </h1>
+          <div class="w-16"></div>
+        </div>
+
+        <button
+          (click)="openAddTask()"
+          class="w-full flex items-center justify-center gap-2 py-3.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all active:scale-[0.98] font-medium"
+        >
+          <ion-icon name="plus-outline" class="stroke-[2.5]"></ion-icon>
+          Añadir nueva tarea
+        </button>
+      </div>
+
+      <div
+        class="px-6 py-6 bg-gray-50/50 min-h-[350px] max-h-[80vh] overflow-y-auto"
+      >
+        <ul class="space-y-3 p-0 m-0 list-none">
+          @for (task of tasks(); track task.id) {
+            <li
+              class="group flex items-start justify-between p-4 rounded-xl border transition-all duration-200"
+              [ngClass]="
+                task.completed
+                  ? 'bg-gray-50/80 border-transparent'
+                  : 'bg-white border-gray-200 shadow-sm hover:border-indigo-200 hover:shadow-md'
+              "
+            >
+              <div
+                class="flex items-start gap-4 flex-1 cursor-pointer"
+                (click)="toggleTask(task.id)"
+              >
+                <div
+                  class="flex-shrink-0 w-6 h-6 mt-0.5 rounded-full border-2 flex items-center justify-center transition-all duration-300"
+                  [ngClass]="
+                    task.completed
+                      ? 'bg-indigo-500 border-indigo-500'
+                      : 'border-gray-300 group-hover:border-indigo-400'
+                  "
+                >
+                  @if (task.completed) {
+                    <ion-icon
+                      name="checkmark-sharp"
+                      class="text-white text-[14px]"
+                    ></ion-icon>
+                  }
+                </div>
+
+                <div class="flex-1 min-w-0">
+                  <span
+                    class="text-base font-medium select-none block transition-all duration-300"
+                    [ngClass]="
+                      task.completed
+                        ? 'text-gray-400 line-through'
+                        : 'text-gray-700'
+                    "
+                  >
+                    {{ task.title }}
+                  </span>
+
+                  <span
+                    class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full mt-2 bg-blue-100 text-blue-700"
+                  >
+                    {{ task.categoryId }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex flex-column gap-2">
+                <button
+                  (click)="openTaskModal(task); $event.stopPropagation()"
+                  class="p-2 text-gray-400 hover:text-green-500 hover:bg-green-50 rounded-lg transition-all"
+                >
+                  <ion-icon name="create-outline"></ion-icon>
+                </button>
+
+                <button
+                  (click)="deleteTask(task.id); $event.stopPropagation()"
+                  class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                >
+                  <ion-icon name="trash-outline" class="text-[18px]"></ion-icon>
+                </button>
+              </div>
+            </li>
+          } @empty {
+            <div
+              class="flex flex-col items-center justify-center py-12 text-gray-400 animate-in fade-in zoom-in-95"
+            >
+              <div
+                class="w-16 h-16 mb-4 rounded-full bg-gray-100 flex items-center justify-center"
+              >
+                <ion-icon
+                  name="checkmark-outline"
+                  class="text-2xl text-gray-300"
+                ></ion-icon>
+              </div>
+              <p class="text-sm font-medium">No hay tareas todavía.</p>
+              <p class="text-xs mt-1">¡Añade una arriba para comenzar!</p>
+            </div>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</ion-content>

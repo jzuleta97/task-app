@@ -1,0 +1,89 @@
+<div
+  class="w-full h-full bg-white shadow-2xl border border-gray-200 overflow-hidden"
+>
+  <div
+    class="flex items-center justify-between px-6 py-5 border-b border-gray-100"
+  >
+    <h2 class="text-lg font-bold text-gray-900">{{ labelModal() }}</h2>
+    <button
+      (click)="dismiss()"
+      class="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+    >
+      <ion-icon name="close-outline" class="text-xl"></ion-icon>
+    </button>
+  </div>
+
+  <form
+    [formGroup]="taskForm"
+    (ngSubmit)="submitForm()"
+    class="px-6 py-5 space-y-4"
+  >
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1.5">
+        Título <span class="text-red-400">*</span>
+      </label>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="¿Qué hay que hacer?"
+        [ngClass]="{
+          'border-red-400 ring-1 ring-red-400':
+            f['title'].touched && f['title'].invalid,
+        }"
+        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all shadow-inner"
+      />
+      @if (f["title"].touched && f["title"].invalid) {
+        <p class="text-red-500 text-xs mt-1 ml-1">
+          El título es obligatorio (mín. 3 caracteres).
+        </p>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1.5"
+        >Descripción</label
+      >
+      <textarea
+        formControlName="description"
+        placeholder="Añade algunos detalles..."
+        rows="2"
+        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all resize-none shadow-inner"
+      ></textarea>
+    </div>
+
+    <div class="relative">
+      <label class="block text-sm font-medium text-gray-700 mb-1.5"
+        >Categoría</label
+      >
+      <select
+        formControlName="categoryId"
+        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none cursor-pointer shadow-inner"
+      >
+        @for (cat of categories; track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+      <ion-icon
+        name="chevron-down-outline"
+        class="absolute right-4 bottom-3.5 text-gray-400 pointer-events-none"
+      ></ion-icon>
+    </div>
+
+    <div class="flex items-center gap-3 pt-4">
+      <button
+        type="button"
+        (click)="dismiss()"
+        class="flex-1 py-3 text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 font-medium transition-all active:scale-95"
+      >
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        [disabled]="taskForm.invalid"
+        class="flex-1 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98] shadow-lg shadow-indigo-200"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
