@@ -41,6 +41,21 @@ const tasks: TaskI[] = [
     completed: true,
     categoryId: 'work',
     createdAt: Date.now(),
+  }, {
+    id: '4',
+    title: 'Rutina de cardio',
+    description: 'Completar los 30 minutos de ejercicio diario.',
+    completed: false,
+    categoryId: 'health',
+    createdAt: Date.now(),
+  },
+  {
+    id: '5',
+    title: 'Pagar suscripción de Figma',
+    description: 'Revisar que la tarjeta de crédito tenga fondos suficientes.',
+    completed: true,
+    categoryId: 'work',
+    createdAt: Date.now(),
   },
 ];
 

@@ -35,7 +35,7 @@ export class CategoriesComponent {
     const { data } = await modal.onDidDismiss();
     if (data) {
       this.categoryService.addCategory({
-        id: crypto.randomUUID(),
+        id: data.name.toLowerCase().replace(/\s+/g, '-'),
         ...data,
       });
     }

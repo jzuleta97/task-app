@@ -3,11 +3,11 @@ import { Component, computed, inject } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { CategoryService } from 'src/app/core/services/Category.service';
 import { TaskService } from 'src/app/core/services/Task.service';
-
+import { IonIcon } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, IonIcon],
   templateUrl: './home.page.html',
 })
 export class HomePageComponent {

@@ -22,9 +22,9 @@ const firebaseConfig = {
   apiKey: 'AIzaSyD45hQgYLrnOM5ZxQQMRRwataI5h2CM3Uw',
   authDomain: 'web-app-3504c.firebaseapp.com',
   projectId: 'web-app-3504c',
-  storageBucket: 'web-app-3504c.firebasestorage.app',
   messagingSenderId: '55593564149',
   appId: '1:55593564149:web:8b1fab69b091f37392d2bc',
+  storageBucket: 'web-app-3504c.firebasestorage.app',
   measurementId: 'G-JRL1RS24N0',
 };
 

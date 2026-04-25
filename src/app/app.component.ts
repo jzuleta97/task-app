@@ -21,21 +21,24 @@ import {
   templateUrl: 'app.component.html',
   imports: [IonApp, IonRouterOutlet],
 })
+// app.component.ts
 export class AppComponent {
   constructor() {
+    console.log('Registrando iconos...');
     addIcons({
-      arrowBackOutline,
-      trashOutline,
-      pricetagOutline,
-      createOutline,
-      checkboxOutline,
-      closeOutline,
-      chevronDownOutline,
-      checkmarkSharp,
-      pulseOutline,
-      checkmarkOutline,
-      lockClosedOutline,
-      addOutline
+      'arrow-back-outline': arrowBackOutline,
+      'trash-outline': trashOutline,
+      'pricetag-outline': pricetagOutline,
+      'create-outline': createOutline,
+      'checkbox-outline': checkboxOutline,
+      'close-outline': closeOutline,
+      'chevron-down-outline': chevronDownOutline,
+      'checkmark-sharp': checkmarkSharp,
+      'pulse-outline': pulseOutline,
+      'checkmark-outline': checkmarkOutline,
+      'lock-closed-outline': lockClosedOutline,
+      'add-outline': addOutline,
     });
+    console.log('Iconos registrados correctamente');
   }
 }
