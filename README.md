@@ -1,4 +1,5 @@
 📝 Ionic To-Do App - Prueba Técnica Mobile
+
 Esta es una aplicación de lista de tareas (To-Do List) desarrollada con Ionic 8 y Angular 20, diseñada para demostrar habilidades en arquitectura híbrida, gestión de estado moderno con Signals, y configuración remota mediante Firebase.
 
 🚀 Características Principales
