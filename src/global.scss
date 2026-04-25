@@ -22,3 +22,92 @@
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
+
+
+@layer components {
+  .page-container {
+    @apply min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 font-sans;
+  }
+
+  .card-container {
+    @apply w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200;
+  }
+
+  .btn-primary-emerald {
+    @apply w-full flex items-center justify-center gap-2 py-3.5 bg-emerald-600 text-white rounded-xl font-medium transition-all;
+
+    &:not(:disabled) {
+      @apply hover:bg-emerald-700 active:scale-[0.98];
+    }
+
+    &:disabled {
+      // Usamos clases estándar que v4 reconozca sin problemas
+      @apply opacity-50 cursor-not-allowed bg-gray-400 shadow-none;
+      filter: grayscale(
+        1
+      ); // A veces es mejor usar CSS nativo para filtros en @apply v4
+    }
+  }
+
+  .list-item-category {
+    @apply flex items-center justify-between p-4 rounded-xl border bg-white border-gray-200 shadow-sm transition-all duration-200;
+
+    &:hover {
+      @apply border-emerald-200;
+    }
+  }
+
+  .icon-btn {
+    @apply p-2 rounded-lg transition-all duration-200 flex items-center justify-center;
+    @apply text-gray-400 bg-transparent;
+
+    /* Estilos específicos para el botón EDITAR */
+    &.edit {
+      @apply hover:text-emerald-600 hover:bg-emerald-50;
+
+      ion-icon {
+        @apply text-lg;
+      }
+    }
+
+    /* Estilos específicos para el botón ELIMINAR */
+    &.delete {
+      @apply hover:text-red-600 hover:bg-red-50;
+
+      ion-icon {
+        @apply text-lg;
+      }
+    }
+
+    /* Feedback visual al presionar */
+    &:active {
+      @apply scale-90;
+    }
+  }
+
+  .task-item {
+    @apply flex items-start justify-between p-4 rounded-xl border transition-all duration-200;
+
+    &.completed {
+      @apply bg-gray-50/80 border-transparent;
+    }
+
+    &.pending {
+      @apply bg-white border-gray-200 shadow-sm;
+      &:hover {
+        @apply border-indigo-200 shadow-md;
+      }
+    }
+  }
+
+  .task-checkbox {
+    @apply flex-shrink-0 w-6 h-6 mt-0.5 rounded-full border-2 flex items-center justify-center transition-all duration-300;
+
+    &.checked {
+      @apply bg-indigo-500 border-indigo-500;
+    }
+    &.unchecked {
+      @apply border-gray-300;
+    }
+  }
+}

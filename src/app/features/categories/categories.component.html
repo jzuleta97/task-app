@@ -1,16 +1,12 @@
-<div
-  class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-indigo-100 selection:text-indigo-900"
->
-  <div
-    class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200"
-  >
+<div class="page-container">
+  <div class="card-container">
     <div
       class="px-6 py-6 border-b border-gray-100 bg-white relative z-10 shadow-sm"
     >
       <div class="flex items-center justify-between mb-6">
         <button
           (click)="goBack()"
-          class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-medium rounded-lg px-2 py-1 -ml-2"
+          class="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors font-medium"
         >
           <ion-icon name="arrow-back-outline"></ion-icon>
           Volver
@@ -23,21 +19,25 @@
 
       <button
         (click)="openAddModal()"
-        class="w-full flex items-center justify-center gap-2 py-3.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all active:scale-[0.98] font-medium"
+        [disabled]="!canCreate()"
+        class="btn-primary-emerald"
       >
-        <ion-icon name="plus-outline" class="stroke-[2.5]"></ion-icon>
-        Añadir nueva categoría
+        @if (canCreate()) {
+          <ion-icon name="add-outline" class="stroke-[2.5]"></ion-icon>
+          <span>Añadir nueva categoría</span>
+        } @else {
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <span>Creación deshabilitada</span>
+        }
       </button>
     </div>
 
     <div
-      class="px-6 py-6 bg-gray-50/50 min-h-[350px] max-h-[80vh] overflow-y-auto"
+      class="px-6 py-6 bg-gray-50/50 min-h-[350px] max-h-[75vh] overflow-y-auto"
     >
       <ul class="space-y-3 p-0 m-0 list-none">
         @for (category of categories(); track category.id) {
-          <li
-            class="group flex items-center justify-between p-4 rounded-xl border bg-white border-gray-200 shadow-sm hover:border-emerald-200 transition-all duration-200"
-          >
+          <li class="list-item-category">
             <span
               [class]="category.color"
               class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full"
@@ -49,13 +49,13 @@
             <div class="flex flex-row gap-2">
               <button
                 (click)="openCategoryModal(category)"
-                class="p-2 text-gray-400 hover:text-green-500 hover:bg-green-50 rounded-lg transition-all"
+                class="icon-btn edit"
               >
                 <ion-icon name="create-outline"></ion-icon>
               </button>
               <button
                 (click)="deleteCategory(category.id)"
-                class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                class="icon-btn delete"
               >
                 <ion-icon name="trash-outline" class="text-lg"></ion-icon>
               </button>
@@ -64,17 +64,7 @@
         } @empty {
           <div
             class="flex flex-col items-center justify-center py-12 text-gray-400"
-          >
-            <div
-              class="w-16 h-16 mb-4 rounded-full bg-gray-100 flex items-center justify-center"
-            >
-              <ion-icon
-                name="pricetag-outline"
-                class="text-3xl text-gray-300"
-              ></ion-icon>
-            </div>
-            <p class="text-sm font-medium">No hay categorías todavía.</p>
-          </div>
+          ></div>
         }
       </ul>
     </div>

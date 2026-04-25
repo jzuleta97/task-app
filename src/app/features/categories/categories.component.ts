@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { IonicModule, ModalController, NavController } from '@ionic/angular';
 import { CategoryI } from 'src/app/core/interfaces/category.interface';
 import { CategoryService } from 'src/app/core/services/Category.service';
+import { RemoteConfigService } from 'src/app/core/services/RemoteConfig.service';
 import { CategoryFormComponent } from 'src/app/shared/components/category-form/category-form.component';
 
 @Component({
@@ -11,11 +12,13 @@ import { CategoryFormComponent } from 'src/app/shared/components/category-form/c
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent {
+  private remoteConfigService = inject(RemoteConfigService);
   private categoryService = inject(CategoryService);
   private modalCtrl = inject(ModalController);
   private navCtrl = inject(NavController);
 
   categories = this.categoryService.categories;
+  canCreate = this.remoteConfigService.canCreateCategories;
 
   goBack() {
     this.navCtrl.back();
